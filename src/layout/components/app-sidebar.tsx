@@ -27,7 +27,7 @@ import { NavMain } from "./nav-main";
 import { NavSecondary } from "./nav-secondary";
 import { NavUser } from "./nav-user";
 
-import Logo from "@/assets/logo.png";
+import Logo from "@/../public/favicon.png";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { t } = useTranslation();

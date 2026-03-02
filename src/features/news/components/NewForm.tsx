@@ -32,6 +32,7 @@ const NewsForm = ({ mode, id, initialData }: NewsFormProps) => {
   const typeOptions = [
     { value: NewsType.NEWS, label: t("News") },
     { value: NewsType.ANNOUNCEMENT, label: t("Announcement") },
+    { value: NewsType.DESERTION, label: t("Desertatsiya eloni") },
   ];
 
   const statusOptions = [

@@ -63,15 +63,20 @@ export function useNewColumns(): ColumnDef<News>[] {
     {
       accessorKey: "type",
       header: t("Type"),
-      cell: ({ row }) => (
-        <div>
-          <Badge variant="default">
-            {row.getValue("type") === NewsType.NEWS
-              ? t("News")
-              : t("Announcement")}
-          </Badge>
-        </div>
-      ),
+      cell: ({ row }) => {
+        const type = row.getValue("type") as NewsType;
+        const label =
+          type === NewsType.NEWS
+            ? t("News")
+            : type === NewsType.DESERTION
+              ? t("Desertatsiya eloni")
+              : t("Announcement");
+        return (
+          <div>
+            <Badge variant="default">{label}</Badge>
+          </div>
+        );
+      },
     },
     {
       accessorKey: "published_date",

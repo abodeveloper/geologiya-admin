@@ -123,6 +123,9 @@ export default function NewsPage() {
                     <SelectItem value={NewsType.ANNOUNCEMENT}>
                       {t("Announcement")}
                     </SelectItem>
+                    <SelectItem value={NewsType.DESERTION}>
+                      {t("Desertatsiya eloni")}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               )}

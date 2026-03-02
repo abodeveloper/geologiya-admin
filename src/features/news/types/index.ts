@@ -1,6 +1,7 @@
 export enum NewsType {
   NEWS = "news",
   ANNOUNCEMENT = "announcement",
+  DESERTION = "desertion",
 }
 
 export interface News {

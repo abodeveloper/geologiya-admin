@@ -93,7 +93,11 @@ const NewsDetailPage = () => {
               <div className="absolute bottom-4 left-4">
                 <Badge variant="secondary">
                   <Tag className="mr-1 h-3 w-3" />
-                  {news.type === "news" ? t("News") : t("Announcement")}
+                  {news.type === "news"
+                    ? t("News")
+                    : news.type === "desertion"
+                      ? t("Desertatsiya eloni")
+                      : t("Announcement")}
                 </Badge>
               </div>
             </div>

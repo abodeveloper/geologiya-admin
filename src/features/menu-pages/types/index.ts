@@ -9,4 +9,5 @@ export interface MenuPage {
   type: string;
   slug: string;
   menu: Menu;
+  views_count?: number;
 }

@@ -7,6 +7,7 @@ import { RiDeleteBinLine, RiEditLine } from "@remixicon/react"; // Remix Icon
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
+import { createViewsCountColumn } from "@/shared/table/createViewsCountColumn";
 import { useNavigate } from "react-router-dom";
 import { deleteDepartment } from "../api/department";
 import { Department } from "../types";
@@ -74,6 +75,7 @@ export function useDepartmentColumns(): ColumnDef<Department>[] {
         <Badge variant="secondary">{row.getValue("slug")}</Badge>
       ),
     },
+    createViewsCountColumn<Department>(t),
     {
       accessorKey: "status",
       header: t("Status"),

@@ -23,11 +23,10 @@ import { IconHelp } from "@tabler/icons-react";
 import { Atom, Building2 } from "lucide-react";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { CompanyBranding } from "@/features/company/components/CompanyBranding";
 import { NavMain } from "./nav-main";
 import { NavSecondary } from "./nav-secondary";
 import { NavUser } from "./nav-user";
-
-import Logo from "@/../public/favicon.png";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { t } = useTranslation();
@@ -146,10 +145,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       >
         <SidebarMenu>
           <SidebarMenuItem>
-            <div className="px-1 flex items-center gap-2">
-              <img src={Logo} alt="" width={50} />
-              <span className="ml-1 text-base font-semibold">GGI</span>
-            </div>
+            <CompanyBranding variant="sidebar" />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>

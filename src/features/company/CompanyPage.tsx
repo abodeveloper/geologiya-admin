@@ -43,7 +43,7 @@ export default function CompanyPage() {
     );
 
   return (
-    <div className="space-y-6 container mx-auto p-0 pb-10">
+    <div className="space-y-6 p-0 pb-10">
       {/* 1. Header & Actions */}
       <div className="flex items-center justify-between">
         <div>

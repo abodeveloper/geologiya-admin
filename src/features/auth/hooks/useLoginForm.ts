@@ -1,4 +1,3 @@
-import { toastService } from "@/lib/toastService";
 import { useAuthStore } from "@/store/auth-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -18,8 +17,8 @@ export const useLoginForm = () => {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema(t)),
     defaultValues: {
-      // username: "admin",
-      // password: "12345",
+      username: "",
+      password: "",
     },
   });
 
@@ -28,9 +27,9 @@ export const useLoginForm = () => {
     onSuccess: () => {
       // Success toast store'da ko'rsatiladi
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
+      // Toast auth-store.login catch da (response.detail) — bu yerda takrorlamaslik
       console.error("Login error:", error);
-      toastService.error(error.message || "Kirishda xato yuz berdi");
     },
   });
 
@@ -41,7 +40,6 @@ export const useLoginForm = () => {
   }, [loginMutation.isSuccess, loading, navigate]);
 
   const onSubmit = (data: LoginFormValues) => {
-    form.reset();
     loginMutation.mutate(data);
   };
 

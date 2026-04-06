@@ -4,12 +4,13 @@ import { localized } from "@/i18n";
 import { toastService } from "@/lib/toastService";
 import ConfirmationDialog from "@/shared/components/atoms/confirmation-dialog/ConfirmationDialog";
 import ImageGallery from "@/shared/components/atoms/image-gallery/ImageGallery";
-import { RiDeleteBinLine, RiEditLine } from "@remixicon/react"; // Remix Icon
+import { RiDeleteBinLine, RiEditLine } from "@remixicon/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { createViewsCountColumn } from "@/shared/table/createViewsCountColumn";
 import { deleteNews } from "../api/news";
 import { News, NewsType } from "../types";
 
@@ -94,11 +95,14 @@ export function useNewColumns(): ColumnDef<News>[] {
           return (
             <div className="font-medium whitespace-nowrap">{formattedDate}</div>
           );
-        } catch (error) {
-          return <div className="text-destructive">Invalid date</div>;
+        } catch {
+          return (
+            <div className="text-destructive">{t("Invalid date")}</div>
+          );
         }
       },
     },
+    createViewsCountColumn<News>(t),
     {
       accessorKey: "status",
       header: t("Status"),

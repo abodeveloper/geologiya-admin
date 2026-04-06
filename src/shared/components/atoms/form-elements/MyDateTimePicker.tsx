@@ -21,6 +21,7 @@ import { format } from "date-fns";
 import { ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 import { FieldPath, FieldValues } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 export type MyDateTimePickerProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues>;
@@ -33,6 +34,8 @@ const MyDateTimePicker = <TFieldValues extends FieldValues>({
   rules,
   className,
 }: MyDateTimePickerProps<TFieldValues>) => {
+  const { t } = useTranslation();
+
   return (
     <FormField
       control={control}
@@ -82,7 +85,7 @@ const MyDateTimePicker = <TFieldValues extends FieldValues>({
                       >
                         {field.value
                           ? format(field.value, "dd.MM.yyyy")
-                          : "Sana"}
+                          : t("Select date")}
                         <ChevronDownIcon className="h-4 w-4 opacity-50" />
                       </Button>
                     </FormControl>

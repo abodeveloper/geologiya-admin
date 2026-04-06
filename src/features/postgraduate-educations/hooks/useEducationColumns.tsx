@@ -8,6 +8,7 @@ import { RiDeleteBinLine, RiEditLine } from "@remixicon/react"; // Remix Icon
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
+import { createViewsCountColumn } from "@/shared/table/createViewsCountColumn";
 import { useNavigate } from "react-router-dom";
 import { deleteEducation } from "../api/education";
 import { PostgraduateEducation } from "../types";
@@ -120,6 +121,7 @@ export function useEducationColumns(): ColumnDef<PostgraduateEducation>[] {
         <Badge variant="secondary">{row.getValue("slug")}</Badge>
       ),
     },
+    createViewsCountColumn<PostgraduateEducation>(t),
     {
       accessorKey: "status",
       header: t("Status"),

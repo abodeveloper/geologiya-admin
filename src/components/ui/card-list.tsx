@@ -8,6 +8,7 @@ import {
   PaginationNext,
 } from "@/components/ui/pagination";
 import LoadingSpinner from "@/shared/components/atoms/loading-spinner/LoadingSpinner";
+import { useTranslation } from "react-i18next";
 
 interface CardListProps<TData> {
   data: TData[]; // Array of items to display (already paginated by backend)
@@ -36,6 +37,8 @@ export function CardList<TData>({
   onCardClick,
   columnsPerRow = 3, // Default to 3 cards per row on desktop
 }: CardListProps<TData>) {
+  const { t } = useTranslation();
+
   // Calculate start and end indices for display purposes (not for slicing data)
   const start = (currentPage - 1) * pageSize + 1;
   const end = Math.min(currentPage * pageSize, totalCount);
@@ -64,7 +67,7 @@ export function CardList<TData>({
       <div className={`grid ${gridClass} gap-6`}>
         {isLoading ? (
           <div className="col-span-full flex justify-center items-center min-h-[350px]">
-            <LoadingSpinner message="Loading data ..." />
+            <LoadingSpinner message={t("Loading data")} />
           </div>
         ) : paginatedData.length ? (
           paginatedData.map((item, index) => (
@@ -77,7 +80,9 @@ export function CardList<TData>({
             </div>
           ))
         ) : (
-          <div className="col-span-full text-center py-24">No data.</div>
+          <div className="col-span-full text-center py-24">
+            {t("No data available.")}
+          </div>
         )}
       </div>
 
@@ -86,13 +91,14 @@ export function CardList<TData>({
         <div className="flex items-center justify-between py-4">
           {/* Items range display */}
           <div className="text-sm flex items-center w-[200px]">
-            {`${start}-${end} / ${totalCount}`} items
+            {`${start}-${end} / ${totalCount}`} {t("items")}
           </div>
 
           <Pagination className="flex items-center justify-end">
             <PaginationContent>
               <PaginationItem>
                 <PaginationPrevious
+                  title={t("Previous")}
                   onClick={() => onPageChange?.(Math.max(currentPage - 1, 1))}
                   className={
                     currentPage === 1
@@ -116,6 +122,7 @@ export function CardList<TData>({
               )}
               <PaginationItem>
                 <PaginationNext
+                  title={t("Next")}
                   onClick={() =>
                     onPageChange?.(Math.min(currentPage + 1, totalPages))
                   }

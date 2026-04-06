@@ -28,6 +28,8 @@ export const updateCompany = async (data: CompanyDto) => {
   if (data.youtube) formData.append("youtube", data.youtube);
   if (data.linkedin) formData.append("linkedin", data.linkedin);
 
+  formData.append("test_status", data.test_status ? "true" : "false");
+
   if (data.phone_number) formData.append("phone_number", data.phone_number);
   if (data.email) formData.append("email", data.email);
 

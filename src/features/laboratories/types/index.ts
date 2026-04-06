@@ -9,4 +9,5 @@ export interface Laboratory {
   description_ru?: string;
   description_en?: string;
   status: boolean;
+  views_count?: number;
 }

@@ -8,7 +8,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import i18n from "@/i18n";
-import { useTranslation } from "react-i18next";
 
 // Rasmlar
 import RuLogo from "@/assets/lang-icon/ru.png";
@@ -29,23 +28,28 @@ const FlagIcon = ({ code }: { code: string }) => {
   return (
     <img
       src={src}
-      alt={`${code} flag`}
+      alt=""
       className="w-5 h-5 mr-2 object-contain rounded-sm"
     />
   );
 };
 
 export function SiteHeader() {
-  const { t } = useTranslation();
-
   const languages = [
     { code: "en", label: "English" },
     { code: "uz", label: "O‘zbekcha" },
     { code: "ru", label: "Русский" }, // To‘g‘ri: label: "Русский"
   ];
 
-  const handleLanguageChange = async (value: string) => {
-    await i18n.changeLanguage(value);
+  const handleLanguageChange = (value: string) => {
+    const current = i18n.resolvedLanguage || i18n.language;
+    if (value === current) return;
+    try {
+      localStorage.setItem("i18nextLng", value);
+    } catch {
+      /* ignore */
+    }
+    window.location.reload();
   };
 
   const currentLang = languages.find(

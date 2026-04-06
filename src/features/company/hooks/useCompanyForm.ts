@@ -8,6 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { updateCompany } from "../api/company";
 import { CompanyDto, createCompanySchema } from "../schemas/createCompanySchema";
 
+function normalizeTestStatus(value: unknown): boolean {
+  if (value === true || value === 1) return true;
+  if (value === false || value === 0 || value === null || value === undefined)
+    return false;
+  if (typeof value === "string")
+    return value.toLowerCase() === "true" || value === "1";
+  return Boolean(value);
+}
+
 interface UseFormProps {
   initialData?: Partial<CompanyDto>;
   t: (key: string) => string;
@@ -44,6 +53,7 @@ export const useCompanyForm = ({
       facebook: get(initialData, "facebook", ""),
       youtube: get(initialData, "youtube", ""),
       linkedin: get(initialData, "linkedin", ""),
+      test_status: normalizeTestStatus(get(initialData, "test_status")),
       phone_number: get(initialData, "phone_number", ""),
       email: get(initialData, "email", ""),
       logo: get(initialData, "logo", ""),

@@ -8,6 +8,7 @@ import { RiDeleteBinLine, RiEditLine } from "@remixicon/react"; // Remix Icon
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
+import { createViewsCountColumn } from "@/shared/table/createViewsCountColumn";
 import { useNavigate } from "react-router-dom";
 import { deleteLaboratory } from "../api/laboratory";
 import { Laboratory } from "../types";
@@ -66,6 +67,7 @@ export function useLaboratoryColumns(): ColumnDef<Laboratory>[] {
         <Badge variant="secondary">{row.getValue("slug")}</Badge>
       ),
     },
+    createViewsCountColumn<Laboratory>(t),
     {
       accessorKey: "status",
       header: t("Status"),

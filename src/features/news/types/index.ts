@@ -15,4 +15,5 @@ export interface News {
   type: NewsType;
   status: boolean;
   image?: string | File | null;
+  views_count?: number;
 }

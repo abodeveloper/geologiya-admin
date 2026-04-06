@@ -4,6 +4,7 @@ import { RiEyeLine } from "@remixicon/react";
 import { ColumnDef } from "@tanstack/react-table";
 import { get } from "lodash";
 import { useTranslation } from "react-i18next";
+import { createViewsCountColumn } from "@/shared/table/createViewsCountColumn";
 import { useNavigate } from "react-router-dom";
 import { MenuPage } from "../types";
 
@@ -27,6 +28,7 @@ export function useMenuColumns(): ColumnDef<MenuPage>[] {
         <Badge variant="secondary">{row.getValue("slug")}</Badge>
       ),
     },
+    createViewsCountColumn<MenuPage>(t),
     {
       accessorKey: "status",
       header: t("Status"),

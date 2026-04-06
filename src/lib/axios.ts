@@ -1,6 +1,16 @@
-import axios from "axios";
+import axios, { type InternalAxiosRequestConfig } from "axios";
 import { cookieService } from "@/lib/cookieService";
 import { toastService } from "@/lib/toastService";
+
+/** Login / JWT obtain: 401 = noto'g'ri parol; refresh va login redirect qilmaslik */
+function isJwtObtainRequest(config: InternalAxiosRequestConfig | undefined): boolean {
+  if (!config?.url) return false;
+  const path = config.url.split("?")[0].toLowerCase();
+  const method = (config.method || "get").toLowerCase();
+  if (method !== "post") return false;
+  if (path.includes("refresh")) return false;
+  return /\/token\/?$/.test(path);
+}
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -22,8 +32,15 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
+    if (
+      error.response?.status === 401 &&
+      originalRequest &&
+      !originalRequest._retry &&
+      !isJwtObtainRequest(originalRequest)
+    ) {
       originalRequest._retry = true;
       try {
         const refreshToken = localStorage.getItem("refreshToken");

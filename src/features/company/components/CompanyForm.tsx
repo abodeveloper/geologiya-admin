@@ -4,8 +4,9 @@ import BackButton from "@/shared/components/atoms/back-button/BackButton";
 import {
   MyFileInput,
   MyInput,
-  MyTextarea
+  MyTextarea,
 } from "@/shared/components/atoms/form-elements";
+import MyCheckbox from "@/shared/components/atoms/form-elements/MyCheckbox";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useCompanyForm } from "../hooks/useCompanyForm";
@@ -134,6 +135,13 @@ const CompanyForm = ({ initialData }: FormProps) => {
             <MyInput control={control} name="youtube" label={t("YouTube")} />
             <MyInput control={control} name="linkedin" label={t("LinkedIn")} />
           </div>
+
+          <MyCheckbox
+            control={control}
+            name="test_status"
+            label={t("Test mode")}
+            helperText={t("When enabled, the site is shown as running in test mode")}
+          />
 
           <MyFileInput
             control={control}

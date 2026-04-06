@@ -41,6 +41,8 @@ export const createCompanySchema = (t: (key: string) => string) =>
     youtube: z.string().optional().nullable().or(z.literal("")),
     linkedin: z.string().optional().nullable().or(z.literal("")),
 
+    test_status: z.boolean().default(false),
+
     phone_number: z.string().optional().nullable().or(z.literal("")), // Agar bo'sh string kelsa o'tkazib yuborish uchun
 
     email: z

@@ -37,12 +37,25 @@ if (typeof window !== "undefined") {
   (window as any).localized = localized;
 }
 
+const SUPPORTED = ["uz", "ru", "en"] as const;
+
+function getStoredLanguage(): string {
+  if (typeof window === "undefined") return "uz";
+  try {
+    const raw = localStorage.getItem("i18nextLng");
+    if (raw && (SUPPORTED as readonly string[]).includes(raw)) return raw;
+  } catch {
+    /* private mode */
+  }
+  return "uz";
+}
+
 // i18next ni ishga tushirish
 i18next
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    lng: "uz", // Sizning loyihangiz uchun asosiy til — uz bo'lishi kerak
+    lng: getStoredLanguage(),
     fallbackLng: "uz",
     supportedLngs: ["uz", "ru", "en"],
     ns: ["common"],

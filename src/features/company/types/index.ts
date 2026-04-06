@@ -20,4 +20,5 @@ export interface Company {
   linkedin: string
   phone_number: string
   email: string
+  test_status?: boolean
 }

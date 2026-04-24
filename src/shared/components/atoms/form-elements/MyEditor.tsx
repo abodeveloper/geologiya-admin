@@ -74,7 +74,8 @@ const MyEditor = <TFieldValues extends FieldValues>({
                 )}
               >
                 <Editor
-                  apiKey={import.meta.env.VITE_TINY_EDITOR_KEY_3}       // O'zingizniki bo'lsa almashtiring yoki .env ga qo'ying
+                  licenseKey="gpl"
+                  tinymceScriptSrc={`${import.meta.env.BASE_URL}tinymce/tinymce.min.js`}
                   value={field.value || ""}
                   disabled={disabled}
                   init={{
@@ -83,6 +84,7 @@ const MyEditor = <TFieldValues extends FieldValues>({
                     menubar: true,
                     placeholder: placeholder || t("Type your text here..."),
                     branding: false,
+                    promotion: false,
                     resize: true,
                     content_style:
                       "body { font-family: inherit; font-size: 14px; }",
@@ -127,8 +129,6 @@ const MyEditor = <TFieldValues extends FieldValues>({
                       });
                       return base64;
                     },
-                    // Disabled holatda faqat o'qish rejimi
-                    readonly: disabled,
                   }}
                   onEditorChange={(content) => {
                     if (!disabled) {
